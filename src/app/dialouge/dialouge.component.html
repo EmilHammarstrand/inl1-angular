@@ -1,0 +1,15 @@
+<p>Howdy, stranger. Haven't seen your face around here before. What's your name?</p>
+<form name="frm">
+<input name="answer" type="text" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}" placeholder="Firstname..."/><br><br>
+<input name="answer" type="text" [(ngModel)]="lastName"  [ngModelOptions]="{standalone: true}" placeholder="Lastname"/>
+</form>
+<button  id="saveBtn" (click)="saveBtn($event)"  (click)="showMyContainer=!showMyContainer">save</button>
+
+<button id="clearBtn" (click)="clearStorage()">Forget me</button>
+<button (click)="refreshPage()">Refresh page</button>
+
+<div *ngIf="showMyContainer">
+<p>Alright {{buttonPressValue}}, what can I do you for?</p>
+</div>
+
+<app-select-beverage></app-select-beverage>
