@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserInfoService} from '../../user-info.service';
 
 @Component({
   selector: 'app-the-usual',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./the-usual.component.css']
 })
 export class TheUsualComponent implements OnInit {
+    theUsual(){
 
-  constructor() { }
+    } //the usual button
+
+  constructor(private UIS: UserInfoService) { }
 
   ngOnInit(): void {
   }

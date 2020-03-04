@@ -1,7 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {UserInfoService} from '../user-info.service';
-import { ThrowStmt, createOfflineCompileUrlResolver } from '@angular/compiler';
-import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -13,46 +11,64 @@ import { FormsModule } from '@angular/forms';
 export class DialougeComponent implements OnInit {
   firstName: string;
   lastName: string;
+  summaryNames: string;
+  showMyContainer: boolean;
+  showMyContainerEditBtn: boolean;
+  showMyContainerForm: boolean = true;
+  showMyContainerOnReload: boolean = false;
+  showMyContainerHeadText: boolean = true;
+  allContentExceptUsual: boolean = true;
   buttonPressValue = "";
-  showMyContainer: boolean = false;
+  clicked: boolean;
+  headText: string = "Howdy, stranger. Haven't seen your face around here before. What's your name?";
 
-  refreshPage(){
-    window.location.reload();
+  editBtn(){
+    this.clicked = false;
+    this.firstName = "";
+    this.lastName = "";
+    this.buttonPressValue = "";
+    this.showMyContainerForm = true;
   }
 
-  saveBtn(event: any): void {
-    event.target.disabled = true;
-    console.log("btn clicked: " + this.firstName + this.lastName);
-    window.localStorage.setItem("firstName", this.firstName);
-    window.localStorage.setItem("lastName", this.lastName);
-    window.localStorage.getItem("firstName"); // TODO: lägg i service.
-    window.localStorage.getItem("lastName"); // TODO: lägg i service.
-    this.buttonPressValue = this.firstName + " " + this.lastName;
+  clearMe(){
+    this.firstName = "";  
+    this.lastName = "";
+    this.userInfoService.clearStorage();
+    this.headText = "Got it. Who are you again?"
+    this.clicked = false;
+    this.showMyContainer = false;
+  }
 
-    if(document.forms["frm"].answer.value === ""){
+  saveBtn(): void {
+    this.userInfoService.saveName(this.firstName, this.lastName);
+    let names = this.userInfoService.getName();
+    
+    this.buttonPressValue = names.firstName + " " + names.lastName;
+
+    if(names.firstName === "undefined" || names.lastName === "undefined" || names.firstName === "" || names.lastName === "" || names.firstName === null || names.lastName === null){
       this.showMyContainer = false;
-      console.log("it works");
-    }else{
-     // event.target.disabled = true; // TODO: om båda input fälten är ifyllda disable knappen.
-      this.showMyContainer = true;  
+      this.clicked = false;
+    } else{
+      this.showMyContainerEditBtn = true;
+      this.showMyContainer = true;
+      this.clicked = true;
     }
+  }
 
-    /* if( window.localStorage.getItem("firstName" && "lastName") === null){
-      this.saveBtn = 
-    } */
-  };
-
-  clearStorage(){
-    localStorage.clear();
-    console.log("ls cleared");
-    this.buttonPressValue = "";
-  };
-  
-
-  constructor() { }
+  constructor(private userInfoService: UserInfoService) {}
 
   ngOnInit(): void {
-    
-  }
+    let names = this.userInfoService.getName();
+    this.summaryNames = names.firstName + " " + names.lastName;
 
+    if(names.firstName === null || names.lastName === null || names.firstName === "undefined" || names.lastName === "undefined" || names.firstName === "" || names.lastName === ""){ 
+      this.showMyContainerOnReload;
+      console.log("Ls is empty");
+      this.allContentExceptUsual = true;
+    } else {
+      this.showMyContainerOnReload = true;
+      console.log("Ls is full");
+      this.allContentExceptUsual = false;         
+    }
+  }
 }

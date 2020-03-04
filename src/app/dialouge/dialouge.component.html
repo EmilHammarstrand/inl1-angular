@@ -1,15 +1,33 @@
-<p>Howdy, stranger. Haven't seen your face around here before. What's your name?</p>
-<form name="frm">
-<input name="answer" type="text" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}" placeholder="Firstname..."/><br><br>
-<input name="answer" type="text" [(ngModel)]="lastName"  [ngModelOptions]="{standalone: true}" placeholder="Lastname"/>
+<div id="all">
+
+<div id="content">
+<div *ngIf="allContentExceptUsual">
+<p id="headText"> {{headText}}</p>
+<div *ngIf="showMyContainerForm">
+<form name="frm" id="formZ">
+<input name="answer" type="text" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}" [value]="firstName" placeholder="Firstname..."/><br><br>
+<input name="answer" type="text" [(ngModel)]="lastName"  [ngModelOptions]="{standalone: true}" [value]="lastName" placeholder="Lastname..."/>
 </form>
-<button  id="saveBtn" (click)="saveBtn($event)"  (click)="showMyContainer=!showMyContainer">save</button>
-
-<button id="clearBtn" (click)="clearStorage()">Forget me</button>
-<button (click)="refreshPage()">Refresh page</button>
-
-<div *ngIf="showMyContainer">
-<p>Alright {{buttonPressValue}}, what can I do you for?</p>
+</div>
+<div class="buttons">  
+<button  id="saveBtn" (click)="saveBtn()"  [disabled]="clicked" (click)="showMyContainer" >save</button>
+<button id="clearBtn" (click)="clearMe()">I was never here</button>
+<div *ngIf="showMyContainerEditBtn">
+<button class="buttons" (click)="editBtn()">Edit name</button>
+</div>
 </div>
 
-<app-select-beverage></app-select-beverage>
+    
+
+<div *ngIf="showMyContainer">
+<p id="chooseBev">Alright {{buttonPressValue}}, what can I do you for?</p>
+<app-select-beverage></app-select-beverage><br>
+</div>
+</div>
+<div *ngIf="showMyContainerOnReload">
+    <p> Hello again, {{summaryNames}} . The usual?</p>
+    <app-the-usual>The usual</app-the-usual>
+    <app-select-beverage></app-select-beverage>
+</div>
+</div>
+</div>

@@ -1,3 +1,45 @@
-#saveBtn {
-    background-color: lightgreen;
+button {
+    margin: 1em;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+
+#content{
+    background-color: lightgrey;
+    display: inline-block;   
+}
+
+#all{
+    display: flex;
+    justify-content: center;
+}
+
+#formZ {
+    display: flex;
+    justify-content: center;
+}
+
+input{
+    margin: 5px;
+}
+
+#chooseBev{
+    display: flex;
+    justify-content: center;
+}
+
+app-select-beverage{
+    display: flex;
+    justify-content: center;
+}
+
+app-right-to-be-forgotten{
+    margin: 1em;
+}
+
+#headText {
+    display: flex;
+    justify-content: center;
 }

@@ -1,3 +1,4 @@
 export interface selectBeverage {
-    type: string;
+    drink: string;
+    id: number;
 }
