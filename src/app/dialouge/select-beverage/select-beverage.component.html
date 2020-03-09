@@ -1,12 +1,5 @@
-<div id="asd">
-
 <select #bev (change)="selectedBeverage(bev.value)" >
   <option *ngFor="let b of beverages" >
     {{b.drink}}
   </option>
 </select>
-<div>
-<div *ngIf="showBeverageContainer">
-<p id="pb">One {{beverageToDisplay}}, coming right up!</p>
-</div>
-</div>

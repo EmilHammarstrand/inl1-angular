@@ -32,7 +32,8 @@ export class UserInfoService {
   }
 
   getThisItemBeverage(){
-    window.localStorage.getItem("choosenBeverage");
+    let choosenBeverage = window.localStorage.getItem("choosenBeverage");
+    return choosenBeverage;
   }
 
   constructor() {}

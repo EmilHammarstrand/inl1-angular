@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {UserInfoService} from '../user-info.service';
 
 
@@ -18,9 +18,12 @@ export class DialougeComponent implements OnInit {
   showMyContainerOnReload: boolean = false;
   showMyContainerHeadText: boolean = true;
   allContentExceptUsual: boolean = true;
+  theUsualContainer: boolean = false;
   buttonPressValue = "";
   clicked: boolean;
   headText: string = "Howdy, stranger. Haven't seen your face around here before. What's your name?";
+  beverageToDisplay: string;
+  showBeverageContainer: boolean = false;
 
   editBtn(){
     this.clicked = false;
@@ -28,6 +31,13 @@ export class DialougeComponent implements OnInit {
     this.lastName = "";
     this.buttonPressValue = "";
     this.showMyContainerForm = true;
+  }
+
+  
+
+  getBeverageFromOutput(beverage: string){
+    this.beverageToDisplay = beverage;
+    this.showBeverageContainer = true;
   }
 
   clearMe(){
@@ -58,6 +68,7 @@ export class DialougeComponent implements OnInit {
   constructor(private userInfoService: UserInfoService) {}
 
   ngOnInit(): void {
+
     let names = this.userInfoService.getName();
     this.summaryNames = names.firstName + " " + names.lastName;
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {UserInfoService} from '../../user-info.service';
 
 @Component({
@@ -7,11 +7,19 @@ import {UserInfoService} from '../../user-info.service';
   styleUrls: ['./the-usual.component.css']
 })
 export class TheUsualComponent implements OnInit {
-    theUsual(){
+  
+  theUsualContainer: boolean = false;
+  value: string;
+  clicked: boolean;
 
-    } //the usual button
+  theUsual(){
+    console.log(localStorage.choosenBeverage);
+    this.theUsualContainer = true;
+    this.value = localStorage.choosenBeverage;
+    this.clicked = true;
+  }
 
-  constructor(private UIS: UserInfoService) { }
+  constructor(private userInfoService: UserInfoService) { }
 
   ngOnInit(): void {
   }

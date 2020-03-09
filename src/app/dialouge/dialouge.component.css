@@ -43,3 +43,8 @@ app-right-to-be-forgotten{
     display: flex;
     justify-content: center;
 }
+
+#showBev {
+    display: flex;
+    justify-content: center;
+}

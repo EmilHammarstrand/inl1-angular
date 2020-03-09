@@ -1,2 +1,4 @@
-
-<button id="buttons" (click)="theUsual()">The usual</button>
+<div id="theUsual">
+<button id="buttons" (click)="theUsual()" [disabled]="clicked">The usual</button>
+<div *ngIf="theUsualContainer"> One {{value}}, coming right up!</div>
+</div>

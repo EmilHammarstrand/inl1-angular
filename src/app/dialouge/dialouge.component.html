@@ -1,33 +1,35 @@
 <div id="all">
-
-<div id="content">
-<div *ngIf="allContentExceptUsual">
-<p id="headText"> {{headText}}</p>
-<div *ngIf="showMyContainerForm">
-<form name="frm" id="formZ">
-<input name="answer" type="text" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}" [value]="firstName" placeholder="Firstname..."/><br><br>
-<input name="answer" type="text" [(ngModel)]="lastName"  [ngModelOptions]="{standalone: true}" [value]="lastName" placeholder="Lastname..."/>
-</form>
-</div>
-<div class="buttons">  
-<button  id="saveBtn" (click)="saveBtn()"  [disabled]="clicked" (click)="showMyContainer" >save</button>
-<button id="clearBtn" (click)="clearMe()">I was never here</button>
-<div *ngIf="showMyContainerEditBtn">
-<button class="buttons" (click)="editBtn()">Edit name</button>
-</div>
-</div>
-
-    
-
-<div *ngIf="showMyContainer">
-<p id="chooseBev">Alright {{buttonPressValue}}, what can I do you for?</p>
-<app-select-beverage></app-select-beverage><br>
-</div>
-</div>
-<div *ngIf="showMyContainerOnReload">
-    <p> Hello again, {{summaryNames}} . The usual?</p>
-    <app-the-usual>The usual</app-the-usual>
-    <app-select-beverage></app-select-beverage>
-</div>
-</div>
+    <div id="content">
+        <div *ngIf="allContentExceptUsual">
+            <p id="headText"> {{headText}} </p>
+            <div *ngIf="showMyContainerForm">
+                <form name="frm" id="formZ">
+                <input name="answer" type="text" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}" [value]="firstName" placeholder="Firstname..."/><br><br>
+                <input name="answer" type="text" [(ngModel)]="lastName"  [ngModelOptions]="{standalone: true}" [value]="lastName" placeholder="Lastname..."/>
+                </form>
+            </div>
+            <div class="buttons">  
+                <button  id="saveBtn" (click)="saveBtn()"  [disabled]="clicked" (click)="showMyContainer" >save</button>
+                <button id="clearBtn" (click)="clearMe()">I was never here</button>
+                <div *ngIf="showMyContainerEditBtn">
+                    <button class="buttons" (click)="editBtn()">Edit name</button>
+                </div>
+            </div>
+            <div *ngIf="showMyContainer">
+                <p id="chooseBev" >Alright {{buttonPressValue}}, what can I do you for?</p>
+                <app-select-beverage (onSelectBeverage)="getBeverageFromOutput($event)"></app-select-beverage>
+                <div id="showBev" *ngIf="showBeverageContainer">
+                    One {{beverageToDisplay}}, coming right up!
+                </div>
+            </div>
+        </div>
+        <div *ngIf="showMyContainerOnReload">
+            <p> Hello again, {{summaryNames}} . The usual?</p>
+            <app-select-beverage (onSelectBeverage)="getBeverageFromOutput($event)"></app-select-beverage>
+            <app-the-usual><br></app-the-usual>
+        <div *ngIf="showBeverageContainer">
+            One {{beverageToDisplay}}, coming right up!
+        </div>
+        </div>
+    </div>
 </div>

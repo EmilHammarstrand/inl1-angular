@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { selectBeverage } from "../interface-beverage";
 import { UserInfoService} from "../../user-info.service";
+
 
 @Component({
   selector: 'app-select-beverage',
@@ -10,13 +11,16 @@ import { UserInfoService} from "../../user-info.service";
 export class SelectBeverageComponent implements OnInit {
     beverageToDisplay: string;
     showBeverageContainer: boolean = false;
+    
+    @Output() onSelectBeverage: EventEmitter<string> = new EventEmitter();
+  
 
-    selectedBeverage(p){
+    selectedBeverage(p: string){
       this.showBeverageContainer = true;
       this.beverageToDisplay = p;
       this.UIS.setThisItemBeverage(this.beverageToDisplay);
       this.UIS.getThisItemBeverage();
-
+      this.onSelectBeverage.emit(this.beverageToDisplay);
     }
 
     beverages: selectBeverage[] = [
